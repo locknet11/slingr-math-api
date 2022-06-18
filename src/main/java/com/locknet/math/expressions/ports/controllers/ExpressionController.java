@@ -24,11 +24,11 @@ public class ExpressionController {
 	private final OperationService operationService;
 
 	@GetMapping()
-	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<?> calculate(@RequestParam(name = "expression", required = true) String expressionParam,
 			@RequestParam(name = "precision", required = false) Optional<Integer> precision) {
-		
-		if(Base64.isBase64(expressionParam)) {
+
+		if (Base64.isBase64(expressionParam)) {
 			byte[] decodedBytes = Base64.decodeBase64(expressionParam);
 			expressionParam = new String(decodedBytes);
 		}
@@ -40,6 +40,5 @@ public class ExpressionController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-
 
 }
